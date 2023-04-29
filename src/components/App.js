@@ -1,21 +1,19 @@
 import React from 'react';
-import About from './About';
-import Accordion from './Accordion';
-import Instructions from './Instructions';
+import { Routes, Route } from 'react-router-dom';
 import Layout from './Layout';
-import MainDisplay from './MainDisplay';
-import Navigation from './Navigation';
+import Main from './Main';
+import About from './About';
+import Instructions from './Instructions';
 
 function App() {
   return (
-    <div>
-      <About />
-      <Accordion />
-      <Instructions />
-      <Layout />
-      <MainDisplay />
-      <Navigation />
-    </div>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route path="main" element={<Main />} />
+        <Route path="about" element={<About />} />
+        <Route path="instructions" element={<Instructions />} />
+      </Route>
+    </Routes>
   );
 }
 

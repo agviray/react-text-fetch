@@ -1,10 +1,23 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Navigation = () => {
   return (
-    <div>
-      <h1>Navigation</h1>
-    </div>
+    <nav>
+      <div>
+        <ul>
+          <li>
+            <Link to="main">Main</Link>
+          </li>
+          <li>
+            <Link to="about">about</Link>
+          </li>
+          <li>
+            <Link to="instructions">Instructions</Link>
+          </li>
+        </ul>
+      </div>
+    </nav>
   );
 };
 
