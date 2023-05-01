@@ -1,1 +1,7 @@
 @import '../../styles/variables/variables.scss';
+
+h1 {
+  padding: 1rem;
+  font-size: $appHeadingFontSize;
+  text-align: center;
+}
