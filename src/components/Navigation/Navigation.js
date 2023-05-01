@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './navigation.css';
 
 const Navigation = () => {
   return (
     <nav>
-      <div>
-        <ul>
+      <ul>
+        <div>
           <li>
             <Link to="main">Main</Link>
           </li>
@@ -15,8 +16,8 @@ const Navigation = () => {
           <li>
             <Link to="instructions">Instructions</Link>
           </li>
-        </ul>
-      </div>
+        </div>
+      </ul>
     </nav>
   );
 };

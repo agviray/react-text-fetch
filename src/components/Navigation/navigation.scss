@@ -1,1 +1,15 @@
 @import '../../styles/variables/variables.scss';
+
+ul {
+  & > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    li {
+      flex: 1;
+      padding: 0.75rem 0;
+      text-align: center;
+    }
+  }
+}
