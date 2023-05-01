@@ -1,5 +1,19 @@
 @import '../../styles/variables/variables.scss';
 
+.layoutContainer {
+  height: $appHeight;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  height: 97px;
+}
+
+main {
+  flex: 1;
+}
+
 h1 {
   padding: 1rem;
   font-size: $appHeadingFontSize;

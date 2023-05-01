@@ -5,19 +5,21 @@ import './navigation.css';
 const Navigation = () => {
   return (
     <nav>
-      <ul>
-        <div>
-          <li>
-            <Link to="/">My Text</Link>
-          </li>
-          <li>
-            <Link to="about">About</Link>
-          </li>
-          <li>
-            <Link to="instructions">Instructions</Link>
-          </li>
-        </div>
-      </ul>
+      <div className="navigationContainer">
+        <ul>
+          <div>
+            <li>
+              <Link to="/">My Text</Link>
+            </li>
+            <li>
+              <Link to="about">About</Link>
+            </li>
+            <li>
+              <Link to="instructions">Instructions</Link>
+            </li>
+          </div>
+        </ul>
+      </div>
     </nav>
   );
 };

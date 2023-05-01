@@ -6,7 +6,7 @@ import './layout.css';
 
 const Layout = () => {
   return (
-    <div>
+    <div className="layoutContainer">
       <header>
         <h1>Text Fetch</h1>
         <Navigation />

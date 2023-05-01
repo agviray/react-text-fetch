@@ -5,9 +5,11 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
-html {
+html,
+body {
   width: 350px;
   height: 400px;
+  border: 1px solid red;
 }
 
 p {

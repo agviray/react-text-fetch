@@ -7,9 +7,11 @@
   font-family: $globalFontFamily;
 }
 
-html {
+html,
+body {
   width: 350px;
-  height: 400px;
+  height: $appHeight;
+  border: 1px solid red;
 }
 
 p {

@@ -1,1 +1,17 @@
 @import '../../styles/variables/variables.scss';
+
+.keyCollectionContainer {
+  height: 100%;
+
+  ul {
+    height: 100%;
+
+    & > div {
+      height: 100%;
+      max-height: 218.5px;
+      padding: 0.75rem;
+      border: 1px solid #333333;
+      overflow-y: auto;
+    }
+  }
+}
