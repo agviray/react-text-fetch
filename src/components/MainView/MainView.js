@@ -9,6 +9,8 @@ const MainView = () => {
     <div className="mainContainer">
       <div>
         <KeyCollection />
+      </div>
+      <div>
         <KeyInput />
         <Template />
       </div>

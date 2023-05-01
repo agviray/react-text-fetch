@@ -2,8 +2,19 @@
 
 .mainContainer {
   @include viewPadding();
+  display: flex;
+  gap: 2rem;
 
-  h2 {
-    @include viewHeading();
+  h3 {
+    @include mainViewHeadings();
+  }
+
+  & > div {
+    display: flex;
+
+    &:nth-of-type(2) {
+      flex: 1;
+      flex-direction: column;
+    }
   }
 }

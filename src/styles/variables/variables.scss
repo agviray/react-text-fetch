@@ -16,6 +16,11 @@ $viewHeadingFontSize: 18px;
   padding: 1.5rem 1rem;
 }
 
+@mixin mainViewHeadings {
+  font-size: 16px;
+  padding-bottom: 1rem;
+}
+
 @mixin viewHeading {
   font-size: $viewHeadingFontSize;
   padding-bottom: 1rem;
