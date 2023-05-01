@@ -1,7 +1,9 @@
 @import '../../styles/variables/variables.scss';
 
 .aboutContainer {
+  height: 100%;
   @include viewPadding();
+  background-color: $aboutBackgroundColor;
 
   h2 {
     @include viewHeading();

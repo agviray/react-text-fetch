@@ -1,5 +1,7 @@
 .aboutContainer {
+  height: 100%;
   padding: 1.5rem 1rem;
+  background-color: #729c9b;
 }
 .aboutContainer h2 {
   font-size: 18px;

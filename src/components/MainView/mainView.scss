@@ -2,10 +2,10 @@
 
 .mainContainer {
   height: 100%;
-  border: 1px solid #333333;
   @include viewPadding();
   display: flex;
   gap: 2rem;
+  background-color: $myTextBackgroundColor;
 
   h3 {
     @include mainViewHeadings();

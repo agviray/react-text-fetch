@@ -1,7 +1,9 @@
 @import '../../styles/variables/variables.scss';
 
 .instructionsContainer {
+  height: 100%;
   @include viewPadding();
+  background-color: $instructionsBackgroundColor;
 
   h2 {
     @include viewHeading();

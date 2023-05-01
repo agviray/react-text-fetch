@@ -5,6 +5,22 @@
 }
 .navigationContainer ul > div li {
   flex: 1;
-  padding: 0.75rem 0;
   text-align: center;
+  border-radius: 10px 10px 0 0;
+}
+.navigationContainer ul > div li a {
+  width: 100%;
+  padding: 0.75rem 0;
+  display: inline-block;
+}
+.navigationContainer ul > div li:nth-of-type(1) {
+  background-color: #c7d7d7;
+}
+.navigationContainer ul > div li:nth-of-type(2) {
+  color: #fefefe;
+  background-color: #729c9b;
+}
+.navigationContainer ul > div li:nth-of-type(3) {
+  color: #fefefe;
+  background-color: #0b605e;
 }/*# sourceMappingURL=navigation.css.map */

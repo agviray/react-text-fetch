@@ -1,12 +1,10 @@
 .keyCollectionContainer {
   height: 100%;
 }
-.keyCollectionContainer ul {
-  height: 100%;
-}
 .keyCollectionContainer ul > div {
   height: 100%;
   max-height: 218.5px;
   border: 1px solid #767676;
   overflow-y: auto;
+  background-color: #ffffff;
 }/*# sourceMappingURL=keyCollection.css.map */
