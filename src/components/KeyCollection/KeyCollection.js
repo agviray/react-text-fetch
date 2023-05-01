@@ -1,5 +1,5 @@
 import React from 'react';
-import KeyItem from './KeyItem';
+import KeyItem from '../KeyItem/KeyItem';
 
 const KeyCollection = () => {
   return (
