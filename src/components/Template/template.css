@@ -10,6 +10,15 @@
   font-size: 16px;
   resize: none;
 }
+.templateContainer textarea::-webkit-scrollbar {
+  width: 5px;
+}
+.templateContainer textarea::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+.templateContainer textarea::-webkit-scrollbar-thumb {
+  background-color: #bdbaba;
+}
 .templateContainer > div {
   padding-top: 0.5rem;
 }

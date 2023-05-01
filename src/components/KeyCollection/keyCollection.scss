@@ -10,6 +10,8 @@
       border: 1px solid #767676;
       overflow-y: auto;
       background-color: #ffffff;
+
+      @include scrollbarStyle();
     }
   }
 }
