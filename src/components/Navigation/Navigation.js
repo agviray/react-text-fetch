@@ -8,7 +8,7 @@ const Navigation = () => {
       <ul>
         <div>
           <li>
-            <Link to="main">Main</Link>
+            <Link to="/">My Text</Link>
           </li>
           <li>
             <Link to="about">About</Link>
