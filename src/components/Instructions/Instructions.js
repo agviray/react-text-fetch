@@ -1,8 +1,9 @@
 import React from 'react';
+import './instructions.css';
 
 const Instructions = () => {
   return (
-    <div>
+    <div className="instructionsContainer">
       <h2>Instructions</h2>
       <div>
         <ol>

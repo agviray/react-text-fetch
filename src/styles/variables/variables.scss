@@ -1,5 +1,21 @@
-// Color
+// ***********
+// Variables
+// ***********
+// - Color
 $mainViewBgColor: #f3f3f3;
 
-// Font
+// - Font
 $globalFontFamily: Arial, Helvetica, sans-serif;
+$viewHeadingFontSize: 20px;
+
+// ***********
+// Mixins
+// ***********
+@mixin viewPadding {
+  padding: 1.5rem 1rem;
+}
+
+@mixin viewHeading {
+  font-size: $viewHeadingFontSize;
+  padding-bottom: 1rem;
+}

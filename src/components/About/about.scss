@@ -1,1 +1,9 @@
 @import '../../styles/variables/variables.scss';
+
+.aboutContainer {
+  @include viewPadding();
+
+  h2 {
+    @include viewHeading();
+  }
+}

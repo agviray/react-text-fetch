@@ -1,1 +1,7 @@
-/*# sourceMappingURL=mainView.css.map */
+.mainContainer {
+  padding: 1.5rem 1rem;
+}
+.mainContainer h2 {
+  font-size: 20px;
+  padding-bottom: 1rem;
+}/*# sourceMappingURL=mainView.css.map */

@@ -6,7 +6,7 @@ import './mainView.css';
 
 const MainView = () => {
   return (
-    <div className="container">
+    <div className="mainContainer">
       <div>
         <KeyCollection />
         <KeyInput />
