@@ -1,8 +1,8 @@
 import React from 'react';
-
+import './keyItem.css';
 const KeyItem = ({ children }) => {
   return (
-    <li>
+    <li className="keyItemContainer">
       <span>{children}</span>
     </li>
   );

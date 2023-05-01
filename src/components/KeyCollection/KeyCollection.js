@@ -14,6 +14,9 @@ const KeyCollection = () => {
           <KeyItem>JJ8</KeyItem>
           <KeyItem>ZFC</KeyItem>
           <KeyItem>55V</KeyItem>
+          <KeyItem>45A</KeyItem>
+          <KeyItem>9DCC</KeyItem>
+          <KeyItem>UI3</KeyItem>
         </div>
       </ul>
     </div>
