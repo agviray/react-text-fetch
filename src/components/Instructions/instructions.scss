@@ -1,11 +1,34 @@
 @import '../../styles/variables/variables.scss';
 
 .instructionsContainer {
-  height: 100%;
   @include viewPadding();
+  height: 100%;
   background-color: $instructionsBackgroundColor;
 
-  h2 {
-    @include viewHeading();
+  & > div {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-height: 263px;
+    padding: 1rem;
+    background-color: white;
+    overflow-y: auto;
+    @include scrollbarStyle();
+
+    h2 {
+      @include viewHeading();
+    }
+
+    ol {
+      flex: 1;
+
+      & > div {
+        padding-left: 1rem;
+
+        li {
+          padding-bottom: 0.75rem;
+        }
+      }
+    }
   }
 }

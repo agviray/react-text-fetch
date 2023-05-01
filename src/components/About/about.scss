@@ -5,7 +5,11 @@
   @include viewPadding();
   background-color: $aboutBackgroundColor;
 
-  h2 {
-    @include viewHeading();
+  div {
+    h2 {
+      @include viewHeading();
+    }
+    padding: 1rem;
+    background-color: #fefefe;
   }
 }

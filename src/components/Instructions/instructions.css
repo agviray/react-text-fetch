@@ -1,9 +1,36 @@
 .instructionsContainer {
-  height: 100%;
   padding: 1.5rem 1rem;
+  height: 100%;
   background-color: #0b605e;
 }
-.instructionsContainer h2 {
+.instructionsContainer > div {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: 263px;
+  padding: 1rem;
+  background-color: white;
+  overflow-y: auto;
+}
+.instructionsContainer > div::-webkit-scrollbar {
+  width: 5px;
+}
+.instructionsContainer > div::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+.instructionsContainer > div::-webkit-scrollbar-thumb {
+  background-color: #bdbaba;
+}
+.instructionsContainer > div h2 {
   font-size: 18px;
   padding-bottom: 1rem;
+}
+.instructionsContainer > div ol {
+  flex: 1;
+}
+.instructionsContainer > div ol > div {
+  padding-left: 1rem;
+}
+.instructionsContainer > div ol > div li {
+  padding-bottom: 0.75rem;
 }/*# sourceMappingURL=instructions.css.map */
