@@ -6,9 +6,6 @@ const Template = () => {
     <div className="templateContainer">
       <h3>Template</h3>
       <textarea />
-      <div>
-        <span>Save</span>
-      </div>
     </div>
   );
 };

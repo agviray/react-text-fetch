@@ -13,6 +13,9 @@ const MainView = () => {
       <div>
         <KeyInput />
         <Template />
+        <div>
+          <span>Save</span>
+        </div>
       </div>
     </div>
   );

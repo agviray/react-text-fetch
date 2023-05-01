@@ -14,23 +14,4 @@
 
     @include scrollbarStyle();
   }
-
-  // *** Save button container ***
-  & > div {
-    padding-top: 0.5rem;
-
-    & span {
-      display: inline-block;
-      padding: 0.5rem 0.75rem;
-      text-align: center;
-      color: #333333;
-      background-color: rgb(235, 235, 235);
-
-      &:hover {
-        cursor: pointer;
-        color: $lightFontColor;
-        background-color: rgb(173, 173, 173);
-      }
-    }
-  }
 }
