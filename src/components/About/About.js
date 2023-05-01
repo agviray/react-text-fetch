@@ -4,7 +4,7 @@ import './about.css';
 const About = () => {
   return (
     <div className="aboutContainer">
-      <h2>About</h2>
+      <h2>What is Text Fetch?</h2>
       <div>
         <p>
           Text Fetch is a tool used for inserting text templates in various text

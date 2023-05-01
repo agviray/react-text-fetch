@@ -4,7 +4,7 @@ import './instructions.css';
 const Instructions = () => {
   return (
     <div className="instructionsContainer">
-      <h2>Instructions</h2>
+      <h2>How it works</h2>
       <div>
         <ol>
           <li>
