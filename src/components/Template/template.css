@@ -1,1 +1,27 @@
-/*# sourceMappingURL=template.css.map */
+.templateContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.templateContainer textarea {
+  flex: 1;
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 16px;
+  resize: none;
+}
+.templateContainer > div {
+  padding-top: 0.5rem;
+}
+.templateContainer > div span {
+  display: inline-block;
+  padding: 0.5rem 0.75rem;
+  text-align: center;
+  color: #333333;
+  background-color: rgb(235, 235, 235);
+}
+.templateContainer > div span:hover {
+  cursor: pointer;
+  color: #fefefe;
+  background-color: rgb(173, 173, 173);
+}/*# sourceMappingURL=template.css.map */
