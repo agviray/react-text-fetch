@@ -6,9 +6,9 @@ import './mainView.css';
 
 const storedKeyTemplatePairs = 'storedKeyTemplatePairs';
 const initialActivePair = {
-  id: '',
-  keyText: '',
-  templateText: '',
+  id: null,
+  keyText: null,
+  templateText: null,
 };
 const MainView = () => {
   const [keyTemplatePairs, setKeyTemplatePairs] = useState([]);
@@ -31,16 +31,42 @@ const MainView = () => {
     }
   }, []);
 
+  // ******************************************************************************
+  // ******************************************************************************
+  // - DELETE THIS WHEN READY TO DEPLOY
+  // - useEffect for viewing state values only
+  // ******************************************************************************
+  // ******************************************************************************
+  useEffect(() => {
+    if (activePair.keyText === null || activePair.templateText === null) {
+      console.log(`The activePair is incomplete. Its value is:`);
+      console.log(activePair);
+      return;
+    } else {
+      console.log(`The activePair is complete! Its value is:`);
+      console.log(activePair);
+    }
+  }, [activePair]);
+
   // - Saves active pair to localStorage.
   const saveActivePair = (pair) => {
     // - call setKeyTemplatePairs([...keyTemplatePairs, pair])
   };
 
-  // - Updates data of activePair.
-  // - activePair value may be a stored pair that user wishes to edit, or
-  //   it may be a new pair that the user wants to add.
-  const updateActivePair = () => {
-    // - Set activePair state.
+  // - Updates activePair.keyText value.
+  const updateActivePairKey = (keyText) => {
+    if (keyText === '') {
+      return;
+    }
+    setActivePair({ ...activePair, keyText: keyText });
+  };
+
+  // - Updates activePair.templateText value.
+  const updateActivePairTemplate = (templateText) => {
+    if (templateText === '') {
+      return;
+    }
+    setActivePair({ ...activePair, templateText: templateText });
   };
 
   return (
@@ -49,8 +75,8 @@ const MainView = () => {
         <KeyCollection />
       </div>
       <div>
-        <KeyInput />
-        <Template />
+        <KeyInput onActiveKeyChange={updateActivePairKey} />
+        <Template onActiveTemplateChange={updateActivePairTemplate} />
         <div>
           <span>Save</span>
         </div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './keyInput.css';
 
-const KeyInput = () => {
+const KeyInput = ({ onActiveKeyChange }) => {
   const [key, setKey] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -14,12 +14,11 @@ const KeyInput = () => {
   };
 
   const handleInputBlur = (text) => {
-    // - Regular expression for only numbers and letters.
-    const regex = /^[A-Za-z0-9]*$/;
-    if (regex.test(text) === false) {
-      setErrorMessage('Key must only contain numbers or letters.');
-    } else if (text.length < 3) {
+    if (text.length < 3) {
       setErrorMessage('Key must be 3 to 4 characters.');
+      return;
+    } else {
+      onActiveKeyChange(text);
     }
   };
 

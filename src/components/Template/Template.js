@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './template.css';
 
-const Template = () => {
+const Template = ({ onActiveTemplateChange }) => {
   const [templateText, setTemplateText] = useState('');
 
   const handleChange = (text) => {
@@ -10,6 +10,7 @@ const Template = () => {
       return;
     }
     setTemplateText(text);
+    onActiveTemplateChange(text);
   };
 
   return (
