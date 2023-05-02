@@ -2,21 +2,15 @@ import React from 'react';
 import KeyItem from '../KeyItem/KeyItem';
 import './keyCollection.css';
 
-const KeyCollection = () => {
+const KeyCollection = ({ keyTemplatePairs }) => {
   return (
     <div className="keyCollectionContainer">
       <h3>All Keys</h3>
       <ul>
         <div>
-          <KeyItem>ABC1</KeyItem>
-          <KeyItem>K44</KeyItem>
-          <KeyItem>PZA</KeyItem>
-          <KeyItem>JJ8</KeyItem>
-          <KeyItem>ZFC</KeyItem>
-          <KeyItem>55V</KeyItem>
-          <KeyItem>45A</KeyItem>
-          <KeyItem>9DCC</KeyItem>
-          <KeyItem>UI3</KeyItem>
+          {keyTemplatePairs.map(({ id, keyText }) => (
+            <KeyItem key={id}>{keyText}</KeyItem>
+          ))}
         </div>
       </ul>
     </div>

@@ -1,24 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './keyInput.css';
 
-const KeyInput = ({ onActiveKeyChange }) => {
-  const [key, setKey] = useState('');
+const KeyInput = ({ onActiveKeyChange, werePairsUpdated }) => {
+  const [keyText, setKeyText] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+
+  // - Clear text from input.
+  useEffect(() => {
+    if (werePairsUpdated === true) {
+      setKeyText('');
+      setErrorMessage('');
+    }
+  }, [werePairsUpdated]);
 
   const handleInputChange = (text) => {
     // - Set max key characters to 4.
     if (text.length > 4) {
       return;
     }
-    setKey(text);
+    setKeyText(text);
+    onActiveKeyChange(text);
   };
 
   const handleInputBlur = (text) => {
     if (text.length < 3) {
       setErrorMessage('Key must be 3 to 4 characters.');
-      return;
-    } else {
-      onActiveKeyChange(text);
     }
   };
 
@@ -32,7 +38,7 @@ const KeyInput = ({ onActiveKeyChange }) => {
       <h3>Key</h3>
       <input
         type="text"
-        value={key}
+        value={keyText}
         onFocus={(e) => handleInputFocus(e)}
         onBlur={(e) => handleInputBlur(e.target.value)}
         onChange={(e) => handleInputChange(e.target.value)}

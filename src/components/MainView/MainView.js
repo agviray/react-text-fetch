@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import KeyCollection from '../KeyCollection/KeyCollection';
 import KeyInput from '../KeyInput/KeyInput';
 import Template from '../Template/Template';
@@ -13,6 +14,7 @@ const initialActivePair = {
 const MainView = () => {
   const [keyTemplatePairs, setKeyTemplatePairs] = useState([]);
   const [activePair, setActivePair] = useState(initialActivePair);
+  const [werePairsUpdated, setWerePairsUpdated] = useState(false);
 
   // - Initial load of stored key/template pairs.
   // - This will either get stored data of key from localStorage, or set the initial
@@ -31,6 +33,20 @@ const MainView = () => {
     }
   }, []);
 
+  // - Replaces current key/template pairs in localStorage with updated value.
+  useEffect(() => {
+    localStorage.setItem(
+      storedKeyTemplatePairs,
+      JSON.stringify(keyTemplatePairs)
+    );
+
+    // - Reset activePair to initial value after updating keyTemplatePairs (both in app and in localStorage)
+    if (werePairsUpdated === true) {
+      setActivePair(initialActivePair);
+      setWerePairsUpdated(false);
+    }
+  }, [keyTemplatePairs]);
+
   // ******************************************************************************
   // ******************************************************************************
   // - DELETE THIS WHEN READY TO DEPLOY
@@ -40,22 +56,33 @@ const MainView = () => {
   useEffect(() => {
     if (activePair.keyText === null || activePair.templateText === null) {
       console.log(`The activePair is incomplete. Its value is:`);
-      console.log(activePair);
       return;
     } else {
       console.log(`The activePair is complete! Its value is:`);
       console.log(activePair);
     }
-  }, [activePair]);
+    console.log('Value of werePairsUpdated state is:');
+    console.log(werePairsUpdated);
+  }, [activePair, werePairsUpdated]);
 
-  // - Saves active pair to localStorage.
-  const saveActivePair = (pair) => {
-    // - call setKeyTemplatePairs([...keyTemplatePairs, pair])
+  // - Updates keyTemplatePairs, resulting in updating stored data in localStorage.
+  const saveNewActivePair = (pair) => {
+    if (pair.keyText === null || pair.templateText === null) {
+      // - Display notification stating to fill out erroneous field?
+      return;
+    }
+    if (pair.id === null) {
+      const newPair = { ...pair, id: uuidv4() };
+      setKeyTemplatePairs([...keyTemplatePairs, newPair]);
+      setWerePairsUpdated(true);
+    }
   };
 
   // - Updates activePair.keyText value.
   const updateActivePairKey = (keyText) => {
-    if (keyText === '') {
+    // - Check if keyText is less than 3 characters. (key character minimum is 3)
+    if (keyText === '' || keyText.length < 3) {
+      setActivePair({ ...activePair, keyText: null });
       return;
     }
     setActivePair({ ...activePair, keyText: keyText });
@@ -64,6 +91,7 @@ const MainView = () => {
   // - Updates activePair.templateText value.
   const updateActivePairTemplate = (templateText) => {
     if (templateText === '') {
+      setActivePair({ ...activePair, templateText: null });
       return;
     }
     setActivePair({ ...activePair, templateText: templateText });
@@ -72,13 +100,19 @@ const MainView = () => {
   return (
     <div className="mainContainer">
       <div>
-        <KeyCollection />
+        <KeyCollection keyTemplatePairs={keyTemplatePairs} />
       </div>
       <div>
-        <KeyInput onActiveKeyChange={updateActivePairKey} />
-        <Template onActiveTemplateChange={updateActivePairTemplate} />
+        <KeyInput
+          onActiveKeyChange={updateActivePairKey}
+          werePairsUpdated={werePairsUpdated}
+        />
+        <Template
+          onActiveTemplateChange={updateActivePairTemplate}
+          werePairsUpdated={werePairsUpdated}
+        />
         <div>
-          <span>Save</span>
+          <span onClick={() => saveNewActivePair({ ...activePair })}>Save</span>
         </div>
       </div>
     </div>

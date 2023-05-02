@@ -1,8 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './template.css';
 
-const Template = ({ onActiveTemplateChange }) => {
+const Template = ({ onActiveTemplateChange, werePairsUpdated }) => {
   const [templateText, setTemplateText] = useState('');
+
+  // - Clear text from textarea.
+  useEffect(() => {
+    if (werePairsUpdated === true) {
+      setTemplateText('');
+    }
+  }, [werePairsUpdated]);
 
   const handleChange = (text) => {
     // - Set word limit to maximum of 30.
