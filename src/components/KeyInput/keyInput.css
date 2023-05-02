@@ -1,9 +1,14 @@
 .keyInputContainer {
   padding-bottom: 1rem;
-  width: 80px;
 }
 .keyInputContainer input {
+  width: 80px;
   font-size: 16px;
-  width: 100%;
   padding: 0.25rem 0.5rem;
+}
+.keyInputContainer p {
+  padding-top: 0.25rem;
+  width: 100%;
+  color: rgb(242, 57, 57);
+  font-size: 14px;
 }/*# sourceMappingURL=keyInput.css.map */

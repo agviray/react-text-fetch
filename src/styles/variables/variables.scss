@@ -43,3 +43,10 @@ $appHeight: 400px;
     background-color: #bdbaba;
   }
 }
+
+@mixin errorMessageStyle {
+  padding-top: 0.25rem;
+  width: 100%;
+  color: rgb(242, 57, 57);
+  font-size: 14px;
+}
