@@ -1,6 +1,7 @@
 @import '../../styles/variables/variables.scss';
 
 .layoutContainer {
+  position: relative; // - position: relative to contain Modal (Modal used in MainView.js)
   height: $appHeight;
   display: flex;
   flex-direction: column;

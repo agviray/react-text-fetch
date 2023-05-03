@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import KeyCollection from '../KeyCollection/KeyCollection';
 import KeyInput from '../KeyInput/KeyInput';
 import Template from '../Template/Template';
+import Modal from '../Modal/Modal';
 import './mainView.css';
 
 const storedKeyTemplatePairs = 'storedKeyTemplatePairs';
@@ -15,6 +16,7 @@ const MainView = () => {
   const [keyTemplatePairs, setKeyTemplatePairs] = useState([]);
   const [activePair, setActivePair] = useState(initialActivePair);
   const [werePairsUpdated, setWerePairsUpdated] = useState(false);
+  const [modalDetails, setModalDetails] = useState({});
 
   // - Initial load of stored key/template pairs.
   // - This will either get stored data of key from localStorage, or set the initial
@@ -66,34 +68,56 @@ const MainView = () => {
   }, [activePair, werePairsUpdated]);
 
   // - Updates keyTemplatePairs, resulting in updating stored data in localStorage.
+  // - Validation done here as well.
   const saveNewActivePair = (pair) => {
     // - Check if activePair key and template values are valid.
     if (pair.keyText === null || pair.templateText === null) {
-      // - Display notification stating to fill out erroneous field?
-      return;
-    } else {
-      // - Check if activePair.keyText is a duplicate of an existing key name.
-      const allPairs = [...keyTemplatePairs];
-      let isKeyDuplicate = false;
-      for (let i = 0; i < allPairs.length; i++) {
-        if (allPairs[i].keyText === pair.keyText) {
-          isKeyDuplicate = true;
-          break;
-        }
-      }
-      if (isKeyDuplicate === true) {
-        // - Display notification stating to choose another key name?
-        console.log(
-          `A Key with the name, "${pair.keyText}", already exists. Enter a different Key name.`
-        );
-        setActivePair({ ...activePair, keyText: null });
+      if (pair.keyText === null) {
+        setModalDetails({ message: `The Key field cannot be left blank.` });
+      } else if (pair.templateText === null) {
+        setModalDetails({
+          message: `The Template field cannot be left blank. `,
+        });
         return;
-      } else {
-        // - Checks passed, OK to update keyTemplatePairs.
-        if (pair.id === null) {
-          const newPair = { ...pair, id: uuidv4() };
-          setKeyTemplatePairs([...keyTemplatePairs, newPair]);
-          setWerePairsUpdated(true);
+      }
+    } else if (pair.keyText.length !== 0) {
+      // - Check length of key. Key length must be 3 characters, minimum.
+      if (pair.keyText.length < 3) {
+        setModalDetails({ message: `Your Key must be 3 to 4 characters.` });
+        return;
+      } else if (pair.keyText.length >= 3) {
+        const regex = /^[A-Za-z0-9]*$/; // - Regular expression for only numbers and letters.
+        // - Check if keyText contains characters other than
+        //   numbers or letters.
+        if (regex.test(pair.keyText) === false) {
+          setModalDetails({
+            message: `Your Key must only contain numbers or letters.`,
+          });
+          return;
+        } else {
+          // - Check if activePair.keyText is a duplicate of an existing key name.
+          const allPairs = [...keyTemplatePairs];
+          let isKeyDuplicate = false;
+          for (let i = 0; i < allPairs.length; i++) {
+            if (allPairs[i].keyText === pair.keyText) {
+              isKeyDuplicate = true;
+              break;
+            }
+          }
+          if (isKeyDuplicate === true) {
+            setModalDetails({
+              message: `A Key with the name, "${pair.keyText}", already exists. Enter a different Key name.`,
+            });
+            setActivePair({ ...activePair, keyText: null });
+            return;
+          } else {
+            // - All final checks passed, OK to update keyTemplatePairs.
+            if (pair.id === null) {
+              const newPair = { ...pair, id: uuidv4() };
+              setKeyTemplatePairs([...keyTemplatePairs, newPair]);
+              setWerePairsUpdated(true);
+            }
+          }
         }
       }
     }
@@ -101,8 +125,7 @@ const MainView = () => {
 
   // - Updates activePair.keyText value.
   const updateActivePairKey = (keyText) => {
-    // - Check if keyText is less than 3 characters. (key character minimum is 3)
-    if (keyText === '' || keyText.length < 3) {
+    if (keyText === '') {
       setActivePair({ ...activePair, keyText: null });
       return;
     }
@@ -119,24 +142,33 @@ const MainView = () => {
   };
 
   return (
-    <div className="mainContainer">
-      <div>
-        <KeyCollection keyTemplatePairs={keyTemplatePairs} />
-      </div>
-      <div>
-        <KeyInput
-          onActiveKeyChange={updateActivePairKey}
-          werePairsUpdated={werePairsUpdated}
-        />
-        <Template
-          onActiveTemplateChange={updateActivePairTemplate}
-          werePairsUpdated={werePairsUpdated}
-        />
+    <>
+      <Modal
+        modalDetails={
+          Object.keys(modalDetails).length === 0 ? null : modalDetails
+        }
+      />
+      <div className="mainContainer">
         <div>
-          <span onClick={() => saveNewActivePair({ ...activePair })}>Save</span>
+          <KeyCollection keyTemplatePairs={keyTemplatePairs} />
+        </div>
+        <div>
+          <KeyInput
+            onActiveKeyChange={updateActivePairKey}
+            werePairsUpdated={werePairsUpdated}
+          />
+          <Template
+            onActiveTemplateChange={updateActivePairTemplate}
+            werePairsUpdated={werePairsUpdated}
+          />
+          <div>
+            <span onClick={() => saveNewActivePair({ ...activePair })}>
+              Save
+            </span>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
