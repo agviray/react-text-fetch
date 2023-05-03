@@ -67,14 +67,35 @@ const MainView = () => {
 
   // - Updates keyTemplatePairs, resulting in updating stored data in localStorage.
   const saveNewActivePair = (pair) => {
+    // - Check if activePair key and template values are valid.
     if (pair.keyText === null || pair.templateText === null) {
       // - Display notification stating to fill out erroneous field?
       return;
-    }
-    if (pair.id === null) {
-      const newPair = { ...pair, id: uuidv4() };
-      setKeyTemplatePairs([...keyTemplatePairs, newPair]);
-      setWerePairsUpdated(true);
+    } else {
+      // - Check if activePair.keyText is a duplicate of an existing key name.
+      const allPairs = [...keyTemplatePairs];
+      let isKeyDuplicate = false;
+      for (let i = 0; i < allPairs.length; i++) {
+        if (allPairs[i].keyText === pair.keyText) {
+          isKeyDuplicate = true;
+          break;
+        }
+      }
+      if (isKeyDuplicate === true) {
+        // - Display notification stating to choose another key name?
+        console.log(
+          `A Key with the name, "${pair.keyText}", already exists. Enter a different Key name.`
+        );
+        setActivePair({ ...activePair, keyText: null });
+        return;
+      } else {
+        // - Checks passed, OK to update keyTemplatePairs.
+        if (pair.id === null) {
+          const newPair = { ...pair, id: uuidv4() };
+          setKeyTemplatePairs([...keyTemplatePairs, newPair]);
+          setWerePairsUpdated(true);
+        }
+      }
     }
   };
 
