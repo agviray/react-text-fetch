@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './modal.css';
+import WarningIcon from '../icons/WarningIcon';
 
 const Modal = ({ modalDetails }) => {
   const [isActive, setIsActive] = useState(false);
@@ -21,9 +22,26 @@ const Modal = ({ modalDetails }) => {
     <div className={`modalContainer ${isActive ? 'active' : ''}`}>
       <div>
         <div className="modalBox">
-          <p>{modalDetails.message}</p>
-          <div className="buttonContainer">
-            <span onClick={closeModal}>OK</span>
+          <div>
+            <div className="icon">
+              <span>
+                <WarningIcon
+                  style={{
+                    triangleColor: '#0b605e',
+                    exclamationColor: 'white',
+                  }}
+                />
+              </span>
+            </div>
+          </div>
+          <div>
+            <div className="heading">
+              <h3>{modalDetails.heading}</h3>
+            </div>
+            <p>{modalDetails.message}</p>
+            <div className="buttonContainer" onClick={closeModal}>
+              OK
+            </div>
           </div>
         </div>
       </div>

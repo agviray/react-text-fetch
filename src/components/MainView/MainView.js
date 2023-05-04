@@ -73,9 +73,13 @@ const MainView = () => {
     // - Check if activePair key and template values are valid.
     if (pair.keyText === null || pair.templateText === null) {
       if (pair.keyText === null) {
-        setModalDetails({ message: `The Key field cannot be left blank.` });
+        setModalDetails({
+          heading: `Check Key`,
+          message: `The Key field cannot be left blank.`,
+        });
       } else if (pair.templateText === null) {
         setModalDetails({
+          heading: `Check Template`,
           message: `The Template field cannot be left blank. `,
         });
         return;
@@ -83,7 +87,10 @@ const MainView = () => {
     } else if (pair.keyText.length !== 0) {
       // - Check length of key. Key length must be 3 characters, minimum.
       if (pair.keyText.length < 3) {
-        setModalDetails({ message: `Your Key must be 3 to 4 characters.` });
+        setModalDetails({
+          heading: `Check Key Length`,
+          message: `Your Key must be 3 to 4 characters.`,
+        });
         return;
       } else if (pair.keyText.length >= 3) {
         const regex = /^[A-Za-z0-9]*$/; // - Regular expression for only numbers and letters.
@@ -91,6 +98,7 @@ const MainView = () => {
         //   numbers or letters.
         if (regex.test(pair.keyText) === false) {
           setModalDetails({
+            heading: `Invalid Key Name`,
             message: `Your Key must only contain numbers or letters.`,
           });
           return;
@@ -106,6 +114,7 @@ const MainView = () => {
           }
           if (isKeyDuplicate === true) {
             setModalDetails({
+              heading: `Duplicate Key Name`,
               message: `A Key with the name, "${pair.keyText}", already exists. Enter a different Key name.`,
             });
             setActivePair({ ...activePair, keyText: null });
