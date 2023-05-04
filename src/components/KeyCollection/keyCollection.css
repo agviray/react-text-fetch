@@ -20,4 +20,14 @@
 }
 .keyCollectionContainer ul > div::-webkit-scrollbar-thumb {
   background-color: #bdbaba;
+}
+
+.keyItem span {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  padding: 0.5rem 0;
+}
+.keyItem.selected {
+  background-color: rgb(219, 238, 255);
 }/*# sourceMappingURL=keyCollection.css.map */

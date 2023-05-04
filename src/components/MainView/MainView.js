@@ -15,9 +15,9 @@ const initialActivePair = {
 const MainView = () => {
   const [keyTemplatePairs, setKeyTemplatePairs] = useState([]);
   const [activePair, setActivePair] = useState(initialActivePair);
+  const [selectedPair, setSelectedPair] = useState({});
   const [werePairsUpdated, setWerePairsUpdated] = useState(false);
   const [modalDetails, setModalDetails] = useState({});
-  console.log('MainView rendered');
 
   // - Initial load of stored key/template pairs.
   // - This will either get stored data of key from localStorage, or set the initial
@@ -49,24 +49,6 @@ const MainView = () => {
       setWerePairsUpdated(false);
     }
   }, [keyTemplatePairs]);
-
-  // ******************************************************************************
-  // ******************************************************************************
-  // - DELETE THIS WHEN READY TO DEPLOY
-  // - useEffect for viewing state values only
-  // ******************************************************************************
-  // ******************************************************************************
-  useEffect(() => {
-    if (activePair.keyText === null || activePair.templateText === null) {
-      console.log(`The activePair is incomplete. Its value is:`);
-      return;
-    } else {
-      console.log(`The activePair is complete! Its value is:`);
-      console.log(activePair);
-    }
-    console.log('Value of werePairsUpdated state is:');
-    console.log(werePairsUpdated);
-  }, [activePair, werePairsUpdated]);
 
   // - Updates keyTemplatePairs, resulting in updating stored data in localStorage.
   // - Validation done here as well.
@@ -132,6 +114,10 @@ const MainView = () => {
     }
   };
 
+  const updateSelectedPair = (pair) => {
+    setSelectedPair({ ...pair });
+  };
+
   // - Updates activePair.keyText value.
   const updateActivePairKey = (keyText) => {
     if (keyText === '') {
@@ -159,7 +145,11 @@ const MainView = () => {
       />
       <div className="mainContainer">
         <div>
-          <KeyCollection keyTemplatePairs={keyTemplatePairs} />
+          <KeyCollection
+            keyTemplatePairs={keyTemplatePairs}
+            selectedPair={selectedPair}
+            onSelectedPairChange={updateSelectedPair}
+          />
         </div>
         <div>
           <KeyInput
