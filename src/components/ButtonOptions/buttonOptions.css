@@ -1,0 +1,41 @@
+.buttonOptions {
+  padding-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.buttonOptions span {
+  padding: 0.5rem 0.75rem;
+  text-align: center;
+  color: #333333;
+}
+.buttonOptions span:hover {
+  cursor: pointer;
+}
+.buttonOptions span.save {
+  background-color: rgb(255, 222, 74);
+}
+.buttonOptions span.save:hover {
+  background-color: rgb(220, 191, 64);
+}
+.buttonOptions span.edit {
+  color: #fefefe;
+  background-color: rgb(75, 119, 251);
+}
+.buttonOptions span.edit:hover {
+  background-color: rgb(51, 85, 188);
+}
+.buttonOptions span.delete {
+  color: #fefefe;
+  background-color: rgb(244, 49, 49);
+}
+.buttonOptions span.delete:hover {
+  background-color: rgb(183, 54, 54);
+}
+.buttonOptions span.cancel {
+  background-color: rgb(235, 235, 235);
+}
+.buttonOptions span.cancel:hover {
+  color: #fefefe;
+  background-color: rgb(173, 173, 173);
+}/*# sourceMappingURL=buttonOptions.css.map */

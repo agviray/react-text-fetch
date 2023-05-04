@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import KeyCollection from '../KeyCollection/KeyCollection';
 import KeyInput from '../KeyInput/KeyInput';
 import Template from '../Template/Template';
+import ButtonOptions from '../ButtonOptions/ButtonOptions';
 import Modal from '../Modal/Modal';
 import './mainView.css';
 
@@ -12,11 +13,19 @@ const initialActivePair = {
   keyText: '',
   templateText: '',
 };
+const initialButtons = [
+  {
+    type: 'save',
+    name: 'Save',
+  },
+];
+
 const MainView = () => {
   const [keyTemplatePairs, setKeyTemplatePairs] = useState([]);
   const [activePair, setActivePair] = useState(initialActivePair);
   const [selectedPair, setSelectedPair] = useState({});
   const [werePairsUpdated, setWerePairsUpdated] = useState(false);
+  const [buttons, setButtons] = useState(initialButtons);
   const [modalDetails, setModalDetails] = useState({});
 
   // - Initial load of stored key/template pairs.
@@ -51,17 +60,79 @@ const MainView = () => {
     }
   }, [keyTemplatePairs]);
 
+  // - If existing key was selected, set that key's pair as
+  //   the activePair.
+  // - This triggers an "editing mode", so different buttons
+  //   will appear.
   useEffect(() => {
     if (Object.keys(selectedPair).length === 0) {
-      return;
+      setButtons(initialButtons);
     } else {
+      setButtons([
+        {
+          type: 'edit',
+          name: 'Edit',
+        },
+        {
+          type: 'delete',
+          name: 'Delete',
+        },
+        {
+          type: 'cancel',
+          name: 'Cancel',
+        },
+      ]);
       setActivePair({ ...selectedPair });
     }
   }, [selectedPair]);
 
+  // - Renders different button options depending on whether
+  //   editing mode is entered or exited.
+  const renderButtonOptions = (details, pair) => {
+    let buttonDetails = [...details];
+    buttonDetails = buttonDetails.map((detail) => {
+      switch (detail.type) {
+        case 'save':
+          return { ...detail, buttonAction: saveNewActivePair };
+        case 'edit':
+          return { ...detail, buttonAction: () => enterEditMode() };
+        case 'delete':
+          return {
+            ...detail,
+            buttonAction: deleteSelectedPair,
+          };
+        case 'cancel':
+          return { ...detail, buttonAction: () => exitEditMode() };
+        default:
+          return null;
+      }
+    });
+    return <ButtonOptions buttons={buttonDetails} activePair={pair} />;
+  };
+
+  // - Enter editing mode.
+  // - Only applies when an existing/saved key is clicked.
+  const enterEditMode = () => {
+    console.log('enable editing');
+  };
+
+  // - Exit editing mode.
+  const exitEditMode = () => {
+    console.log('cancel editing');
+    setActivePair(initialActivePair);
+    setSelectedPair({});
+  };
+
+  // - Delete selected key/template pair.
+  const deleteSelectedPair = (pair) => {
+    console.log('The following pair will be deleted:');
+    console.log(pair);
+  };
+
   // - Updates keyTemplatePairs, resulting in updating stored data in localStorage.
   // - Validation done here as well.
   const saveNewActivePair = (pair) => {
+    console.log(pair);
     // - Check if activePair key and template values are valid.
     if (pair.keyText === '' || pair.templateText === '') {
       if (pair.keyText === '') {
@@ -189,11 +260,7 @@ const MainView = () => {
             onActiveTemplateChange={updateActivePairTemplate}
             templateText={activePair.templateText}
           />
-          <div>
-            <span onClick={() => saveNewActivePair({ ...activePair })}>
-              Save
-            </span>
-          </div>
+          {renderButtonOptions(buttons, activePair)}
         </div>
       </div>
     </>

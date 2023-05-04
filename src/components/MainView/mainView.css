@@ -13,19 +13,4 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-}
-.mainContainer > div:nth-of-type(2) > div:nth-of-type(3) {
-  padding-top: 0.5rem;
-}
-.mainContainer > div:nth-of-type(2) > div:nth-of-type(3) span {
-  display: inline-block;
-  padding: 0.5rem 0.75rem;
-  text-align: center;
-  color: #333333;
-  background-color: rgb(235, 235, 235);
-}
-.mainContainer > div:nth-of-type(2) > div:nth-of-type(3) span:hover {
-  cursor: pointer;
-  color: #fefefe;
-  background-color: rgb(173, 173, 173);
 }/*# sourceMappingURL=mainView.css.map */

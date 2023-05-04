@@ -1,0 +1,49 @@
+@import '../../styles/variables/variables.scss';
+
+.buttonOptions {
+  padding-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  span {
+    padding: $buttonXYPadding;
+    text-align: center;
+    color: #333333;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &.save {
+      background-color: rgb(255, 222, 74);
+      &:hover {
+        background-color: rgb(220, 191, 64);
+      }
+    }
+
+    &.edit {
+      color: $lightFontColor;
+      background-color: rgb(75, 119, 251);
+      &:hover {
+        background-color: rgb(51, 85, 188);
+      }
+    }
+
+    &.delete {
+      color: $lightFontColor;
+      background-color: rgb(244, 49, 49);
+      &:hover {
+        background-color: rgb(183, 54, 54);
+      }
+    }
+
+    &.cancel {
+      background-color: rgb(235, 235, 235);
+      &:hover {
+        color: $lightFontColor;
+        background-color: rgb(173, 173, 173);
+      }
+    }
+  }
+}
