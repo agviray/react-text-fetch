@@ -9,8 +9,8 @@ import './mainView.css';
 const storedKeyTemplatePairs = 'storedKeyTemplatePairs';
 const initialActivePair = {
   id: null,
-  keyText: null,
-  templateText: null,
+  keyText: '',
+  templateText: '',
 };
 const MainView = () => {
   const [keyTemplatePairs, setKeyTemplatePairs] = useState([]);
@@ -50,17 +50,25 @@ const MainView = () => {
     }
   }, [keyTemplatePairs]);
 
+  useEffect(() => {
+    if (Object.keys(selectedPair).length === 0) {
+      return;
+    } else {
+      setActivePair({ ...selectedPair });
+    }
+  }, [selectedPair]);
+
   // - Updates keyTemplatePairs, resulting in updating stored data in localStorage.
   // - Validation done here as well.
   const saveNewActivePair = (pair) => {
     // - Check if activePair key and template values are valid.
-    if (pair.keyText === null || pair.templateText === null) {
-      if (pair.keyText === null) {
+    if (pair.keyText === '' || pair.templateText === '') {
+      if (pair.keyText === '') {
         setModalDetails({
           heading: `Check Key`,
           message: `The Key field cannot be left blank.`,
         });
-      } else if (pair.templateText === null) {
+      } else if (pair.templateText === '') {
         setModalDetails({
           heading: `Check Template`,
           message: `The Template field cannot be left blank. `,
@@ -120,19 +128,11 @@ const MainView = () => {
 
   // - Updates activePair.keyText value.
   const updateActivePairKey = (keyText) => {
-    if (keyText === '') {
-      setActivePair({ ...activePair, keyText: null });
-      return;
-    }
     setActivePair({ ...activePair, keyText: keyText });
   };
 
   // - Updates activePair.templateText value.
   const updateActivePairTemplate = (templateText) => {
-    if (templateText === '') {
-      setActivePair({ ...activePair, templateText: null });
-      return;
-    }
     setActivePair({ ...activePair, templateText: templateText });
   };
 
@@ -154,11 +154,11 @@ const MainView = () => {
         <div>
           <KeyInput
             onActiveKeyChange={updateActivePairKey}
-            werePairsUpdated={werePairsUpdated}
+            keyText={activePair.keyText}
           />
           <Template
             onActiveTemplateChange={updateActivePairTemplate}
-            werePairsUpdated={werePairsUpdated}
+            templateText={activePair.templateText}
           />
           <div>
             <span onClick={() => saveNewActivePair({ ...activePair })}>
