@@ -17,6 +17,7 @@ const MainView = () => {
   const [activePair, setActivePair] = useState(initialActivePair);
   const [werePairsUpdated, setWerePairsUpdated] = useState(false);
   const [modalDetails, setModalDetails] = useState({});
+  console.log('MainView rendered');
 
   // - Initial load of stored key/template pairs.
   // - This will either get stored data of key from localStorage, or set the initial
@@ -117,7 +118,6 @@ const MainView = () => {
               heading: `Duplicate Key Name`,
               message: `A Key with the name, "${pair.keyText}", already exists. Enter a different Key name.`,
             });
-            setActivePair({ ...activePair, keyText: null });
             return;
           } else {
             // - All final checks passed, OK to update keyTemplatePairs.
