@@ -9,8 +9,8 @@ import './mainView.css';
 const storedKeyTemplatePairs = 'storedKeyTemplatePairs';
 const initialActivePair = {
   id: null,
-  keyText: null,
-  templateText: null,
+  keyText: '',
+  templateText: '',
 };
 const MainView = () => {
   const [keyTemplatePairs, setKeyTemplatePairs] = useState([]);
@@ -46,21 +46,30 @@ const MainView = () => {
     // - Reset activePair to initial value after updating keyTemplatePairs (both in app and in localStorage)
     if (werePairsUpdated === true) {
       setActivePair(initialActivePair);
+      setSelectedPair({});
       setWerePairsUpdated(false);
     }
   }, [keyTemplatePairs]);
+
+  useEffect(() => {
+    if (Object.keys(selectedPair).length === 0) {
+      return;
+    } else {
+      setActivePair({ ...selectedPair });
+    }
+  }, [selectedPair]);
 
   // - Updates keyTemplatePairs, resulting in updating stored data in localStorage.
   // - Validation done here as well.
   const saveNewActivePair = (pair) => {
     // - Check if activePair key and template values are valid.
-    if (pair.keyText === null || pair.templateText === null) {
-      if (pair.keyText === null) {
+    if (pair.keyText === '' || pair.templateText === '') {
+      if (pair.keyText === '') {
         setModalDetails({
           heading: `Check Key`,
           message: `The Key field cannot be left blank.`,
         });
-      } else if (pair.templateText === null) {
+      } else if (pair.templateText === '') {
         setModalDetails({
           heading: `Check Template`,
           message: `The Template field cannot be left blank. `,
@@ -88,24 +97,52 @@ const MainView = () => {
         } else {
           // - Check if activePair.keyText is a duplicate of an existing key name.
           const allPairs = [...keyTemplatePairs];
+          let currentActivePair = { ...pair };
           let isKeyDuplicate = false;
           for (let i = 0; i < allPairs.length; i++) {
-            if (allPairs[i].keyText === pair.keyText) {
+            if (allPairs[i].keyText === currentActivePair.keyText) {
               isKeyDuplicate = true;
               break;
             }
           }
+          // - If key name of pair is a duplicate of an existing key, still do additional check on pair id.
+          // - We check the pair id because the user just might be trying to change the template text of
+          //   the existing key.
           if (isKeyDuplicate === true) {
-            setModalDetails({
-              heading: `Duplicate Key Name`,
-              message: `A Key with the name, "${pair.keyText}", already exists. Enter a different Key name.`,
-            });
-            return;
-          } else {
+            // - If key name is duplicate, AND the pair being saved has an id === null, this is a sign that
+            //   the user is trying to create a  new key/template pair. If this is the case, we alert
+            //   the user that the key name they are trying to use is a duplicate, and is not allowed.
+            if (currentActivePair.id === null) {
+              setModalDetails({
+                heading: `Duplicate Key Name`,
+                message: `A Key with the name, "${currentActivePair.keyText}", already exists. Enter a different Key name.`,
+              });
+              return;
+              // - If the key name is a duplicate, BUT the pair being being saved has an id !== null, this is a sign
+              //   that the user is trying to edit something in an existing/saved key/template pair. This is OK.
+            } else if (currentActivePair.id !== null) {
+              let updatedKeyTemplatePairs = [
+                ...allPairs.filter(
+                  (pairItem) => pairItem.id !== currentActivePair.id
+                ),
+                currentActivePair,
+              ];
+              setKeyTemplatePairs(updatedKeyTemplatePairs);
+              setWerePairsUpdated(true);
+            }
+          } else if (isKeyDuplicate === false) {
             // - All final checks passed, OK to update keyTemplatePairs.
             if (pair.id === null) {
               const newPair = { ...pair, id: uuidv4() };
               setKeyTemplatePairs([...keyTemplatePairs, newPair]);
+              setWerePairsUpdated(true);
+            } else if (pair.id !== null) {
+              setKeyTemplatePairs([
+                ...keyTemplatePairs.filter(
+                  (pairItem) => pairItem.id !== pair.id
+                ),
+                pair,
+              ]);
               setWerePairsUpdated(true);
             }
           }
@@ -120,19 +157,11 @@ const MainView = () => {
 
   // - Updates activePair.keyText value.
   const updateActivePairKey = (keyText) => {
-    if (keyText === '') {
-      setActivePair({ ...activePair, keyText: null });
-      return;
-    }
     setActivePair({ ...activePair, keyText: keyText });
   };
 
   // - Updates activePair.templateText value.
   const updateActivePairTemplate = (templateText) => {
-    if (templateText === '') {
-      setActivePair({ ...activePair, templateText: null });
-      return;
-    }
     setActivePair({ ...activePair, templateText: templateText });
   };
 
@@ -154,11 +183,11 @@ const MainView = () => {
         <div>
           <KeyInput
             onActiveKeyChange={updateActivePairKey}
-            werePairsUpdated={werePairsUpdated}
+            keyText={activePair.keyText}
           />
           <Template
             onActiveTemplateChange={updateActivePairTemplate}
-            werePairsUpdated={werePairsUpdated}
+            templateText={activePair.templateText}
           />
           <div>
             <span onClick={() => saveNewActivePair({ ...activePair })}>
