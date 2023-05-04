@@ -136,6 +136,14 @@ const MainView = () => {
               const newPair = { ...pair, id: uuidv4() };
               setKeyTemplatePairs([...keyTemplatePairs, newPair]);
               setWerePairsUpdated(true);
+            } else if (pair.id !== null) {
+              setKeyTemplatePairs([
+                ...keyTemplatePairs.filter(
+                  (pairItem) => pairItem.id !== pair.id
+                ),
+                pair,
+              ]);
+              setWerePairsUpdated(true);
             }
           }
         }
