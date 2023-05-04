@@ -1,5 +1,4 @@
 import React from 'react';
-// import KeyItem from '../KeyItem/KeyItem';
 import './keyCollection.css';
 
 const KeyCollection = ({
