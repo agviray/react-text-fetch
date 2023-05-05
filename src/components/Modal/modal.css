@@ -40,6 +40,9 @@
   background-color: #c7d7d7;
   border-radius: 50%;
 }
+.icon.warning {
+  background-color: #ffbfbf;
+}
 .icon > span {
   position: relative;
   top: -3px;
@@ -66,9 +69,40 @@
   bottom: 0;
   left: 0;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
   padding: 1rem;
   text-align: center;
+  border-radius: 0 0 8px 8px;
+  background-color: #c7d7d7;
+}
+.buttonContainer.warning {
+  background-color: #ffbfbf;
+}
+
+.button {
+  width: 40%;
+  padding: 0.5rem 0.75rem;
   color: #fefefe;
   background-color: #0b605e;
-  border-radius: 0 0 8px 8px;
+}
+.button:hover {
+  cursor: pointer;
+  background-color: #064140;
+}
+.button.cancel {
+  color: #333333;
+  background-color: rgb(235, 235, 235);
+}
+.button.cancel:hover {
+  color: #fefefe;
+  background-color: rgb(173, 173, 173);
+}
+.button.delete {
+  background-color: rgb(244, 49, 49);
+}
+.button.delete:hover {
+  background-color: rgb(183, 54, 54);
 }/*# sourceMappingURL=modal.css.map */

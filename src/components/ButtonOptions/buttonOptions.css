@@ -27,10 +27,10 @@
 }
 .buttonOptions span.delete {
   color: #fefefe;
-  background-color: rgb(244, 49, 49);
+  background-color: #f43131;
 }
 .buttonOptions span.delete:hover {
-  background-color: rgb(183, 54, 54);
+  background-color: #b73636;
 }
 .buttonOptions span.cancel {
   background-color: rgb(235, 235, 235);

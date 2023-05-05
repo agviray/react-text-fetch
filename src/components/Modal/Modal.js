@@ -2,32 +2,73 @@ import React, { useEffect, useState } from 'react';
 import './modal.css';
 import WarningIcon from '../icons/WarningIcon';
 
-const Modal = ({ modalDetails }) => {
-  const [isActive, setIsActive] = useState(false);
+const initialModalStatus = {
+  isActive: false,
+  isDefault: true,
+};
+const Modal = ({ modalDetails, selectedPair }) => {
+  const [modalStatus, setModalStatus] = useState(initialModalStatus);
 
   // - Display modal if modalDetails available.
   useEffect(() => {
     if (!modalDetails) {
-      return;
-    } else {
-      setIsActive(true);
+      setModalStatus(initialModalStatus);
+    } else if (modalDetails) {
+      if (modalDetails.type === 'default') {
+        setModalStatus({ ...modalStatus, isActive: true });
+      } else if (modalDetails.type === 'warning') {
+        setModalStatus({ isActive: true, isDefault: false });
+      }
     }
   }, [modalDetails]);
 
   const closeModal = () => {
-    return isActive ? setIsActive(false) : null;
+    return modalStatus.isActive === true
+      ? setModalStatus(initialModalStatus)
+      : null;
   };
 
-  return isActive ? (
-    <div className={`modalContainer ${isActive ? 'active' : ''}`}>
+  const handleClick = (arg, callback) => {
+    if (!callback) {
+      closeModal();
+    } else {
+      closeModal();
+      callback(arg);
+    }
+  };
+
+  const renderButtons = (buttonDetails, pair) => {
+    return (
+      <>
+        {buttonDetails.map(({ type, text, buttonAction }) => (
+          <div
+            key={type}
+            className={`button ${type}`}
+            onClick={() => handleClick(pair, buttonAction)}
+          >
+            {text}
+          </div>
+        ))}
+      </>
+    );
+  };
+
+  return modalStatus.isActive ? (
+    <div className={`modalContainer ${modalStatus.isActive ? 'active' : ''}`}>
       <div>
         <div className="modalBox">
           <div>
-            <div className="icon">
+            <div
+              className={`icon ${
+                modalStatus.isDefault === true ? '' : 'warning'
+              }`}
+            >
               <span>
                 <WarningIcon
                   style={{
-                    triangleColor: '#0b605e',
+                    triangleColor: `${
+                      modalStatus.isDefault === true ? `#0b605e` : `#f43131`
+                    }`,
                     exclamationColor: 'white',
                   }}
                 />
@@ -39,8 +80,18 @@ const Modal = ({ modalDetails }) => {
               <h3>{modalDetails.heading}</h3>
             </div>
             <p>{modalDetails.message}</p>
-            <div className="buttonContainer" onClick={closeModal}>
-              OK
+            <div
+              className={`buttonContainer ${
+                modalStatus.isDefault === true ? '' : 'warning'
+              }`}
+            >
+              {modalDetails.buttons ? (
+                <>{renderButtons(modalDetails.buttons, selectedPair)}</>
+              ) : (
+                <div className="button" onClick={closeModal}>
+                  OK
+                </div>
+              )}
             </div>
           </div>
         </div>

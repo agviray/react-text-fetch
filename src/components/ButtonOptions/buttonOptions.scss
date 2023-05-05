@@ -32,9 +32,9 @@
 
     &.delete {
       color: $lightFontColor;
-      background-color: rgb(244, 49, 49);
+      background-color: $warningMed;
       &:hover {
-        background-color: rgb(183, 54, 54);
+        background-color: $warningDark;
       }
     }
 

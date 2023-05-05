@@ -1,5 +1,7 @@
 @import '../../styles/variables/variables.scss';
 
+$defaultLight: #c7d7d7;
+
 // - Modal overlay
 .modalContainer {
   display: none;
@@ -42,8 +44,12 @@
   align-items: center;
   width: 50px;
   height: 50px;
-  background-color: #c7d7d7;
+  background-color: $defaultLight;
   border-radius: 50%;
+
+  &.warning {
+    background-color: $warningLight;
+  }
 
   & > span {
     position: relative;
@@ -74,9 +80,46 @@
   bottom: 0;
   left: 0;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
   padding: 1rem;
   text-align: center;
+  border-radius: 0 0 8px 8px;
+  background-color: $defaultLight;
+
+  &.warning {
+    background-color: $warningLight;
+  }
+}
+
+.button {
+  width: 40%;
+  padding: $buttonXYPadding;
   color: $lightFontColor;
   background-color: #0b605e;
-  border-radius: 0 0 8px 8px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #064140;
+  }
+
+  &.cancel {
+    color: #333333;
+    background-color: rgb(235, 235, 235);
+
+    &:hover {
+      color: $lightFontColor;
+      background-color: rgb(173, 173, 173);
+    }
+  }
+
+  &.delete {
+    background-color: rgb(244, 49, 49);
+
+    &:hover {
+      background-color: rgb(183, 54, 54);
+    }
+  }
 }

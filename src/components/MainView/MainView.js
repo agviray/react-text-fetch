@@ -123,7 +123,7 @@ const MainView = () => {
         case 'delete':
           return {
             ...detail,
-            buttonAction: deleteSelectedPair,
+            buttonAction: confirmButtonAction,
           };
         case 'cancel':
           return { ...detail, buttonAction: () => exitEditing() };
@@ -147,10 +147,30 @@ const MainView = () => {
     setIsEditing(false);
   };
 
+  // - Display modal to confirm button
+  const confirmButtonAction = () => {
+    setModalDetails({
+      type: 'warning',
+      heading: `Delete Pair`,
+      message: `Are you sure you want to delete this key/template pair? This action cannot be undone.`,
+      buttons: [
+        {
+          type: 'delete',
+          text: 'Delete pair',
+          buttonAction: deleteSelectedPair,
+        },
+        { type: 'cancel', text: 'Cancel' },
+      ],
+    });
+  };
+
   // - Delete selected key/template pair.
-  const deleteSelectedPair = (pair) => {
-    console.log('The following pair will be deleted:');
-    console.log(pair);
+  const deleteSelectedPair = (pairtToDelete) => {
+    const allPairs = [...keyTemplatePairs];
+    setKeyTemplatePairs(
+      allPairs.filter((pair) => pair.id !== pairtToDelete.id)
+    );
+    setWerePairsUpdated(true);
   };
 
   // - Updates keyTemplatePairs, resulting in updating stored data in localStorage.
@@ -160,11 +180,13 @@ const MainView = () => {
     if (pair.keyText === '' || pair.templateText === '') {
       if (pair.keyText === '') {
         setModalDetails({
+          type: 'default',
           heading: `Check Key`,
           message: `The Key field cannot be left blank.`,
         });
       } else if (pair.templateText === '') {
         setModalDetails({
+          type: 'default',
           heading: `Check Template`,
           message: `The Template field cannot be left blank. `,
         });
@@ -174,6 +196,7 @@ const MainView = () => {
       // - Check length of key. Key length must be 3 characters, minimum.
       if (pair.keyText.length < 3) {
         setModalDetails({
+          type: 'default',
           heading: `Check Key Length`,
           message: `Your Key must be 3 to 4 characters.`,
         });
@@ -184,6 +207,7 @@ const MainView = () => {
         //   numbers or letters.
         if (regex.test(pair.keyText) === false) {
           setModalDetails({
+            type: 'default',
             heading: `Invalid Key Name`,
             message: `Your Key must only contain numbers or letters.`,
           });
@@ -208,6 +232,7 @@ const MainView = () => {
             //   the user that the key name they are trying to use is a duplicate, and is not allowed.
             if (currentActivePair.id === null) {
               setModalDetails({
+                type: 'default',
                 heading: `Duplicate Key Name`,
                 message: `A Key with the name, "${currentActivePair.keyText}", already exists. Enter a different Key name.`,
               });
@@ -265,6 +290,7 @@ const MainView = () => {
         modalDetails={
           Object.keys(modalDetails).length === 0 ? null : modalDetails
         }
+        selectedPair={selectedPair}
       />
       <div className="mainContainer">
         <div>

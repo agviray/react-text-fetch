@@ -21,6 +21,10 @@
 }
 
 .keyItem {
+  &:hover {
+    cursor: pointer;
+  }
+
   & span {
     display: inline-block;
     width: 100%;
