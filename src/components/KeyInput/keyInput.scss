@@ -3,13 +3,17 @@
 .keyInputContainer {
   padding-bottom: 1rem;
 
-  input {
+  input,
+  div {
     width: 80px;
     font-size: 16px;
     padding: 0.25rem 0.5rem;
   }
 
-  p {
-    @include errorMessageStyle();
+  & > div {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    height: 30.5px;
   }
 }

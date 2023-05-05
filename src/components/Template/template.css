@@ -18,4 +18,23 @@
 }
 .templateContainer textarea::-webkit-scrollbar-thumb {
   background-color: #bdbaba;
+}
+.templateContainer > div {
+  flex: 1;
+  width: 100%;
+  max-height: 105px;
+  height: 105px;
+  padding: 0.5rem;
+  font-size: 16px;
+  background-color: white;
+  overflow-y: auto;
+}
+.templateContainer > div::-webkit-scrollbar {
+  width: 5px;
+}
+.templateContainer > div::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+.templateContainer > div::-webkit-scrollbar-thumb {
+  background-color: #bdbaba;
 }/*# sourceMappingURL=template.css.map */

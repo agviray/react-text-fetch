@@ -24,6 +24,7 @@ const MainView = () => {
   const [keyTemplatePairs, setKeyTemplatePairs] = useState([]);
   const [activePair, setActivePair] = useState(initialActivePair);
   const [selectedPair, setSelectedPair] = useState({});
+  const [isEditing, setIsEditing] = useState(false);
   const [werePairsUpdated, setWerePairsUpdated] = useState(false);
   const [buttons, setButtons] = useState(initialButtons);
   const [modalDetails, setModalDetails] = useState({});
@@ -86,8 +87,31 @@ const MainView = () => {
     }
   }, [selectedPair]);
 
+  // - Updates available buttons depending on whether or not the user
+  //   is editing a saved key/template pair.
+  useEffect(() => {
+    if (isEditing === false) {
+      return;
+    }
+
+    if (isEditing === true) {
+      setButtons([
+        {
+          type: 'save',
+          name: 'Save',
+        },
+        {
+          type: 'cancel',
+          name: 'Cancel',
+        },
+      ]);
+    }
+  }, [isEditing]);
+
   // - Renders different button options depending on whether
   //   editing mode is entered or exited.
+  // - Also assigns appropriate click handlers to the buttons
+  //   whenever the available buttons are changed.
   const renderButtonOptions = (details, pair) => {
     let buttonDetails = [...details];
     buttonDetails = buttonDetails.map((detail) => {
@@ -95,14 +119,14 @@ const MainView = () => {
         case 'save':
           return { ...detail, buttonAction: saveNewActivePair };
         case 'edit':
-          return { ...detail, buttonAction: () => enterEditMode() };
+          return { ...detail, buttonAction: () => enterEditing() };
         case 'delete':
           return {
             ...detail,
             buttonAction: deleteSelectedPair,
           };
         case 'cancel':
-          return { ...detail, buttonAction: () => exitEditMode() };
+          return { ...detail, buttonAction: () => exitEditing() };
         default:
           return null;
       }
@@ -112,15 +136,15 @@ const MainView = () => {
 
   // - Enter editing mode.
   // - Only applies when an existing/saved key is clicked.
-  const enterEditMode = () => {
-    console.log('enable editing');
+  const enterEditing = () => {
+    setIsEditing(true);
   };
 
   // - Exit editing mode.
-  const exitEditMode = () => {
-    console.log('cancel editing');
+  const exitEditing = () => {
     setActivePair(initialActivePair);
     setSelectedPair({});
+    setIsEditing(false);
   };
 
   // - Delete selected key/template pair.
@@ -132,7 +156,6 @@ const MainView = () => {
   // - Updates keyTemplatePairs, resulting in updating stored data in localStorage.
   // - Validation done here as well.
   const saveNewActivePair = (pair) => {
-    console.log(pair);
     // - Check if activePair key and template values are valid.
     if (pair.keyText === '' || pair.templateText === '') {
       if (pair.keyText === '') {
@@ -255,10 +278,14 @@ const MainView = () => {
           <KeyInput
             onActiveKeyChange={updateActivePairKey}
             keyText={activePair.keyText}
+            selectedPair={selectedPair}
+            isEditing={isEditing}
           />
           <Template
             onActiveTemplateChange={updateActivePairTemplate}
             templateText={activePair.templateText}
+            selectedPair={selectedPair}
+            isEditing={isEditing}
           />
           {renderButtonOptions(buttons, activePair)}
         </div>
