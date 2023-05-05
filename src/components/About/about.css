@@ -4,6 +4,7 @@
   background-color: #729c9b;
 }
 .aboutContainer div {
+  min-height: 100%;
   padding: 1rem;
   background-color: #fefefe;
 }

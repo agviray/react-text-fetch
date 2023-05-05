@@ -7,8 +7,8 @@ const About = () => {
       <div>
         <h2>What is Text Fetch?</h2>
         <p>
-          Text Fetch is a tool used for inserting text templates in various text
-          fields displayed in the Chrome browser.
+          Text Fetch is tool used to create, stash, and fetch your text
+          templates.
         </p>
       </div>
     </div>
