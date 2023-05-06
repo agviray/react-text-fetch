@@ -1,1 +1,33 @@
-/*# sourceMappingURL=accordion.css.map */
+.accordionContainer {
+  padding: 1rem 1rem;
+}
+
+.headingContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.headingContainer:hover {
+  cursor: pointer;
+}
+.headingContainer > h3 {
+  font-size: 16px;
+}
+
+.bodyContainer {
+  display: none;
+  padding-top: 1rem;
+}
+.bodyContainer.isOpen {
+  display: block;
+}
+.bodyContainer > div > h4 {
+  padding-bottom: 1rem;
+}
+.bodyContainer > div > ol {
+  padding-left: 1rem;
+}
+.bodyContainer > div > ol li {
+  padding-left: 0.5rem;
+  padding-bottom: 0.75rem;
+}/*# sourceMappingURL=accordion.css.map */
