@@ -3,7 +3,7 @@
   "description": "Save and use your templates in any field that accepts text.",
   "version": "1.0.0",
   "manifest_version": 3,
-  "browser_action": {
+  "action": {
     "default_popup": "index.html",
     "default_title": "Text Fetch"
   },
