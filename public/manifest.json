@@ -12,9 +12,5 @@
     "32": "tf-logo128.png",
     "48": "tf-logo128.png",
     "128": "tf-logo128.png"
-  },
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  }
 }
