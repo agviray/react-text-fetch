@@ -4,6 +4,7 @@
   height: 100%;
   @include viewPadding();
   background-color: $aboutBackgroundColor;
+  border-radius: 0 0 10px 10px;
 
   div {
     min-height: 100%;

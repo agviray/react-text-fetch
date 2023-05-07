@@ -6,6 +6,7 @@
   display: flex;
   gap: 2rem;
   background-color: $myTextBackgroundColor;
+  border-radius: 0 0 10px 10px;
 
   h3 {
     @include mainViewHeadings();

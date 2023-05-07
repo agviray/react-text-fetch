@@ -1,11 +1,18 @@
 .accordionContainer {
-  padding: 1rem 1rem;
+  padding: 0 1rem;
+}
+.accordionContainer:hover {
+  background-color: #c7d7d7;
+}
+.accordionContainer.isOpen {
+  background-color: rgb(225, 225, 225);
 }
 
 .headingContainer {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 1rem 0;
 }
 .headingContainer:hover {
   cursor: pointer;

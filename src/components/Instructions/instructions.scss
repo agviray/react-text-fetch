@@ -4,6 +4,7 @@
   @include viewPadding();
   height: 100%;
   background-color: $instructionsBackgroundColor;
+  border-radius: 0 0 10px 10px;
 
   & > div {
     display: flex;

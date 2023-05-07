@@ -9,7 +9,7 @@ const Accordion = ({ accordionContent }) => {
   };
 
   return (
-    <div className="accordionContainer">
+    <div className={`accordionContainer ${isOpen ? 'isOpen' : ''}`}>
       <div className="headingContainer" onClick={() => toggleIsOpen(isOpen)}>
         <h3>{accordionContent.heading}</h3>
         {isOpen ? <span>&#8722;</span> : <span>&#43;</span>}

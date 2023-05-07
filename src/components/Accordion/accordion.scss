@@ -1,13 +1,21 @@
 @import '../../styles/variables/variables.scss';
 
 .accordionContainer {
-  padding: 1rem 1rem;
+  padding: 0 1rem;
+  &:hover {
+    background-color: $myTextBackgroundColor;
+  }
+
+  &.isOpen {
+    background-color: rgb(225, 225, 225);
+  }
 }
 
 .headingContainer {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 1rem 0;
 
   &:hover {
     cursor: pointer;

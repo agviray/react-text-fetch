@@ -2,6 +2,7 @@
   padding: 1.5rem 1rem;
   height: 100%;
   background-color: #0b605e;
+  border-radius: 0 0 10px 10px;
 }
 .instructionsContainer > div {
   display: flex;
