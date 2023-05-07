@@ -1,13 +1,18 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
-  "icons": [
-    {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    }
-  ],
+  "name": "Text Fetch",
+  "description": "Save and use your templates in any field that accepts text.",
+  "version": "1.0.0",
+  "manifest_version": 3,
+  "browser_action": {
+    "default_popup": "index.html",
+    "default_title": "Text Fetch"
+  },
+  "icons": {
+    "16": "tf-logo128.png",
+    "32": "tf-logo128.png",
+    "48": "tf-logo128.png",
+    "128": "tf-logo128.png"
+  },
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
